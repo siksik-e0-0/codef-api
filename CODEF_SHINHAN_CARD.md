@@ -226,13 +226,94 @@ Body: encodeURIComponent(JSON.stringify(payload))
 
 ---
 
+## 6. 청구내역 조회
+
+**POST** `https://development.codef.io/v1/kr/card/b/account/billing-list`
+
+```json
+// Payload
+{
+  "connectedId": "56Yznkq7A1T9Vs3UW80lNK",
+  "organization": "0306",
+  "loginTypeLevel": "0",
+  "cardNo": "451844******1635",
+  "startDate": "202603"
+}
+```
+
+### 파라미터 설명
+
+| Key | 값 | 설명 |
+|---|---|---|
+| cardNo | 마스킹 번호 그대로 | 카드목록 조회 결과값 사용 |
+| startDate | `YYYYMM` | 조회 년월 (6자리) |
+
+```json
+// Response (성공)
+{
+  "result": { "code": "CF-00000", "message": "성공" },
+  "data": {
+    "resPaymentDueDate": "20260315",
+    "resWithdrawalDueDate": "20260316",
+    "resTotalAmount": "412600",
+    "resBillType": "신한카드",
+    "resPaymentAccount": "신한은행 / 100035*****7",
+    "resDepartmentCode": "B002545505",
+    "resDepartmentName": "최*식",
+    "resCardNo": "451844******1635",
+    "resOverseasUse": "0",
+    "resAnnualFee": "10000",
+    "resFullAmt": "402600",
+    "resInstallmentAmt": "0",
+    "resCashService": "0",
+    "resChargeHistoryList": [
+      {
+        "resUsedDate": "20260202",
+        "resUsedCard": "451844******1635",
+        "resMemberStoreName": "씨유(CU)구로우림1차",
+        "resMemberStoreCorpNo": "5580801713",
+        "resMemberStoreAddr": "특별시 구로구 디지털",
+        "resUsedAmount": "19900",
+        "resInstallmentMonth": "",
+        "resPaymentPrincipal": "19900",
+        "resFee": "0",
+        "resMemberStoreType": "편의점",
+        "resApprovalNo": "40683679",
+        "resCancelAmount": ""
+      }
+    ]
+  }
+}
+```
+
+### 주요 응답 필드
+
+| Field | 설명 |
+|---|---|
+| resPaymentDueDate | 결제예정일 (YYYYMMDD) |
+| resWithdrawalDueDate | 출금예정일 (YYYYMMDD) |
+| resTotalAmount | 총 청구금액 |
+| resPaymentAccount | 결제 계좌 |
+| resAnnualFee | 연회비 |
+| resFullAmt | 일시불 금액 |
+| resInstallmentAmt | 할부 금액 |
+| resCashService | 현금서비스 금액 |
+| resChargeHistoryList | 청구 상세 내역 배열 |
+| resChargeHistoryList[].resMemberStoreName | 가맹점명 |
+| resChargeHistoryList[].resUsedAmount | 사용금액 |
+| resChargeHistoryList[].resMemberStoreType | 업종 |
+| resChargeHistoryList[].resApprovalNo | 승인번호 |
+
+---
+
 ## 지원 API 현황 (organization: 0306)
 
 | API | 엔드포인트 | 지원 |
 |---|---|---|
 | 카드 목록 조회 | `/v1/kr/card/b/account/card-list` | ✅ |
-| 승인내역 조회 | `/v1/kr/card/b/account/approval-list` | ✅ |
-| 당일 승인내역 | `/v1/kr/card/b/account/the-day-approval-list` | ❌ |
+| 승인내역 조회 (기간/당일) | `/v1/kr/card/b/account/approval-list` | ✅ |
+| 청구내역 조회 | `/v1/kr/card/b/account/billing-list` | ✅ |
+| 당일 승인내역 전용 | `/v1/kr/card/b/account/the-day-approval-list` | ❌ 0306 미지원 |
 | 청구서/결제/포인트 등 | 기타 | ❌ |
 
 ---
