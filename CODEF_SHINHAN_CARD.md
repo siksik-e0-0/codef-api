@@ -10,9 +10,13 @@
 
 ## 인증 정보
 
-```
-client_id:     73ff2cf3-8ff8-4cad-95fa-935fc53509ea
-client_secret: f9c9bda8-5cdc-4e35-ba52-fbc7b99ea564
+> 민감정보는 `.env` 파일에 저장하고 절대 커밋하지 마세요.
+
+```bash
+# .env
+CODEF_CLIENT_ID=your_client_id
+CODEF_CLIENT_SECRET=your_client_secret
+CODEF_CONNECTED_ID=your_connected_id
 ```
 
 ---
@@ -108,7 +112,7 @@ Body: encodeURIComponent(JSON.stringify(payload))
 {
   "result": { "code": "CF-00000", "message": "성공" },
   "data": {
-    "connectedId": "56Yznkq7A1T9Vs3UW80lNK"
+    "connectedId": "YOUR_CONNECTED_ID"
   }
 }
 ```
@@ -133,7 +137,7 @@ Body: encodeURIComponent(JSON.stringify(payload))
 ```json
 // Payload
 {
-  "connectedId": "56Yznkq7A1T9Vs3UW80lNK",
+  "connectedId": "YOUR_CONNECTED_ID",
   "organization": "0306",
   "loginTypeLevel": "0",
   "inquiryType": "0"
@@ -147,7 +151,7 @@ Body: encodeURIComponent(JSON.stringify(payload))
   "data": [
     {
       "resUserNm": "최*식",
-      "resCardNo": "451844******1635",
+      "resCardNo": "CARD_NO_MASKED",
       "resIssueDate": "20240206",
       "resSleepYN": "N",
       "resCardName": "신한 T&E",
@@ -166,11 +170,11 @@ Body: encodeURIComponent(JSON.stringify(payload))
 ```json
 // Payload
 {
-  "connectedId": "56Yznkq7A1T9Vs3UW80lNK",
+  "connectedId": "YOUR_CONNECTED_ID",
   "organization": "0306",
   "loginTypeLevel": "0",
   "inquiryType": "0",
-  "cardNo": "451844******1635",
+  "cardNo": "CARD_NO_MASKED",
   "startDate": "20260101",
   "endDate": "20260330",
   "orderBy": "0"
@@ -195,7 +199,7 @@ Body: encodeURIComponent(JSON.stringify(payload))
     {
       "resUsedDate": "20260330",
       "resUsedTime": "100232",
-      "resCardNo": "451844******1635",
+      "resCardNo": "CARD_NO_MASKED",
       "resMemberStoreName": "오피카 로스터리",
       "resUsedAmount": "12500",
       "resPaymentType": "1",
@@ -233,10 +237,10 @@ Body: encodeURIComponent(JSON.stringify(payload))
 ```json
 // Payload
 {
-  "connectedId": "56Yznkq7A1T9Vs3UW80lNK",
+  "connectedId": "YOUR_CONNECTED_ID",
   "organization": "0306",
   "loginTypeLevel": "0",
-  "cardNo": "451844******1635",
+  "cardNo": "CARD_NO_MASKED",
   "startDate": "202603"
 }
 ```
@@ -260,7 +264,7 @@ Body: encodeURIComponent(JSON.stringify(payload))
     "resPaymentAccount": "신한은행 / 100035*****7",
     "resDepartmentCode": "B002545505",
     "resDepartmentName": "최*식",
-    "resCardNo": "451844******1635",
+    "resCardNo": "CARD_NO_MASKED",
     "resOverseasUse": "0",
     "resAnnualFee": "10000",
     "resFullAmt": "402600",
@@ -269,7 +273,7 @@ Body: encodeURIComponent(JSON.stringify(payload))
     "resChargeHistoryList": [
       {
         "resUsedDate": "20260202",
-        "resUsedCard": "451844******1635",
+        "resUsedCard": "CARD_NO_MASKED",
         "resMemberStoreName": "씨유(CU)구로우림1차",
         "resMemberStoreCorpNo": "5580801713",
         "resMemberStoreAddr": "특별시 구로구 디지털",
@@ -313,14 +317,14 @@ Body: encodeURIComponent(JSON.stringify(payload))
 ```json
 // Payload
 {
-  "connectedId": "56Yznkq7A1T9Vs3UW80lNK",
+  "connectedId": "YOUR_CONNECTED_ID",
   "organization": "0306",
   "loginTypeLevel": "0",
   "startDate": "20260101",
   "endDate": "20260330",
   "orderBy": "0",
   "inquiryType": "0",
-  "cardNo": "451844******1635",
+  "cardNo": "CARD_NO_MASKED",
   "memberStoreInfoType": "1",
   "type": "0"
 }
@@ -349,13 +353,13 @@ Body: encodeURIComponent(JSON.stringify(payload))
 ```json
 // Payload
 {
-  "connectedId": "56Yznkq7A1T9Vs3UW80lNK",
+  "connectedId": "YOUR_CONNECTED_ID",
   "organization": "0306",
   "loginTypeLevel": "0",
   "startDate": "20260101",
   "endDate": "20260330",
   "searchGbn": "0",
-  "cardNo": "451844******1635"
+  "cardNo": "CARD_NO_MASKED"
 }
 ```
 
@@ -398,11 +402,11 @@ Body: encodeURIComponent(JSON.stringify(payload))
 ```json
 // Payload
 {
-  "connectedId": "56Yznkq7A1T9Vs3UW80lNK",
+  "connectedId": "YOUR_CONNECTED_ID",
   "organization": "0306",
   "loginTypeLevel": "0",
   "inquiryType": "0",
-  "cardNo": "451844******1635"
+  "cardNo": "CARD_NO_MASKED"
 }
 ```
 
@@ -420,7 +424,7 @@ Body: encodeURIComponent(JSON.stringify(payload))
 {
   "result": { "code": "CF-00000", "message": "성공" },
   "data": {
-    "resCardNo": "451844******1635",
+    "resCardNo": "CARD_NO_MASKED",
     "resCardCompany": "신한카드",
     "resLimitAmount": "1500000",
     "resUsedAmount": "1046124",
