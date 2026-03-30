@@ -306,6 +306,140 @@ Body: encodeURIComponent(JSON.stringify(payload))
 
 ---
 
+## 7. 매입내역 조회
+
+**POST** `https://development.codef.io/v1/kr/card/b/account/purchase-details`
+
+```json
+// Payload
+{
+  "connectedId": "56Yznkq7A1T9Vs3UW80lNK",
+  "organization": "0306",
+  "loginTypeLevel": "0",
+  "startDate": "20260101",
+  "endDate": "20260330",
+  "orderBy": "0",
+  "inquiryType": "0",
+  "cardNo": "451844******1635",
+  "memberStoreInfoType": "1",
+  "type": "0"
+}
+```
+
+### 파라미터 설명
+
+| Key | 값 | 설명 |
+|---|---|---|
+| startDate | `YYYYMMDD` | 조회 시작일 |
+| endDate | `YYYYMMDD` | 조회 종료일 |
+| orderBy | `0` | 최신순, `1`: 과거순 |
+| inquiryType | `0` | 카드별 조회, `1`: 전체조회 |
+| cardNo | 마스킹 번호 | inquiryType=`0` 필수 |
+| memberStoreInfoType | `0` | 가맹점 미포함, `1`: 포함 |
+| type | `0` | 기존 조회, `1`: 엑셀다운로드 |
+
+> 신한카드 조회 가능 기간: 제한 없음
+
+---
+
+## 8. 선결제내역 조회
+
+**POST** `https://development.codef.io/v1/kr/card/b/account/prepayment-details`
+
+```json
+// Payload
+{
+  "connectedId": "56Yznkq7A1T9Vs3UW80lNK",
+  "organization": "0306",
+  "loginTypeLevel": "0",
+  "startDate": "20260101",
+  "endDate": "20260330",
+  "searchGbn": "0",
+  "cardNo": "451844******1635"
+}
+```
+
+### 파라미터 설명
+
+| Key | 값 | 설명 |
+|---|---|---|
+| startDate | `YYYYMMDD` | 조회 시작일 |
+| endDate | `YYYYMMDD` | 조회 종료일 |
+| searchGbn | `0` | 카드별 조회, `1`: 전체조회 |
+| cardNo | 마스킹 번호 | searchGbn=`0` 필수 |
+
+```json
+// Response (성공)
+{
+  "result": { "code": "CF-00000", "message": "성공" },
+  "data": {
+    "resAccount": "",
+    "resBankName": "",
+    "resPrePaymentAmt": "",
+    "resPrePaymentDate": "",
+    "resDetailList": [
+      {
+        "resCardNo": "",
+        "resMemberStoreName": "",
+        "resPaymentType": "",
+        "resApprovalAmount": ""
+      }
+    ]
+  }
+}
+```
+
+---
+
+## 9. 한도조회
+
+**POST** `https://development.codef.io/v1/kr/card/b/account/limit`
+
+```json
+// Payload
+{
+  "connectedId": "56Yznkq7A1T9Vs3UW80lNK",
+  "organization": "0306",
+  "loginTypeLevel": "0",
+  "inquiryType": "0",
+  "cardNo": "451844******1635"
+}
+```
+
+### 파라미터 설명
+
+| Key | 값 | 설명 |
+|---|---|---|
+| inquiryType | `0` | 카드별, `1`: 법인 총한도, `2`: 전체 카드별 |
+| cardNo | 마스킹 번호 | inquiryType=`0` 필수 |
+
+> inquiryType=`2` 전체 카드별은 신한카드 총괄관리자 계정만 제공
+
+```json
+// Response (성공)
+{
+  "result": { "code": "CF-00000", "message": "성공" },
+  "data": {
+    "resCardNo": "451844******1635",
+    "resCardCompany": "신한카드",
+    "resLimitAmount": "1500000",
+    "resUsedAmount": "1046124",
+    "resRemainLimit": "453876"
+  }
+}
+```
+
+### 주요 응답 필드
+
+| Field | 설명 |
+|---|---|
+| resLimitAmount | 한도금액 |
+| resUsedAmount | 이용금액 |
+| resRemainLimit | 잔여한도 |
+| resCardCompany | 카드사 |
+
+---
+
 ## 지원 API 현황 (organization: 0306)
 
 | API | 엔드포인트 | 지원 |
@@ -313,8 +447,10 @@ Body: encodeURIComponent(JSON.stringify(payload))
 | 카드 목록 조회 | `/v1/kr/card/b/account/card-list` | ✅ |
 | 승인내역 조회 (기간/당일) | `/v1/kr/card/b/account/approval-list` | ✅ |
 | 청구내역 조회 | `/v1/kr/card/b/account/billing-list` | ✅ |
+| 매입내역 조회 | `/v1/kr/card/b/account/purchase-details` | ✅ |
+| 선결제내역 조회 | `/v1/kr/card/b/account/prepayment-details` | ✅ |
+| 한도조회 | `/v1/kr/card/b/account/limit` | ✅ |
 | 당일 승인내역 전용 | `/v1/kr/card/b/account/the-day-approval-list` | ❌ 0306 미지원 |
-| 청구서/결제/포인트 등 | 기타 | ❌ |
 
 ---
 
