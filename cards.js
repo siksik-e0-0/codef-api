@@ -1,9 +1,10 @@
 const https = require('https');
 const crypto = require('crypto');
 
-const CLIENT_ID = '73ff2cf3-8ff8-4cad-95fa-935fc53509ea';
-const CLIENT_SECRET = 'f9c9bda8-5cdc-4e35-ba52-fbc7b99ea564';
-const CONNECTED_ID = '56Yznkq7A1T9Vs3UW80lNK';
+// .env 파일 또는 환경변수에서 로드 (절대 코드에 직접 입력하지 마세요)
+const CLIENT_ID = process.env.CODEF_CLIENT_ID;
+const CLIENT_SECRET = process.env.CODEF_CLIENT_SECRET;
+const CONNECTED_ID = process.env.CODEF_CONNECTED_ID;
 
 function httpsRequest(options, body) {
   return new Promise((resolve, reject) => {
